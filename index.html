@@ -282,6 +282,74 @@ body {
   .header-right { display: none; }
 }
 
+/* ========= QUICK ACCESS GRID (mobile today page) ========= */
+.quick-grid {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .quick-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+}
+
+.quick-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 16px;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.quick-btn:hover  { transform: translateY(-2px); box-shadow: var(--shadow); border-color: var(--qc); }
+.quick-btn:active { transform: scale(0.97); }
+
+.quick-btn-icon {
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.quick-btn-icon svg { width: 22px; height: 22px; }
+
+.quick-btn-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+.quick-btn-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-top: -6px;
+}
+.quick-btn-count {
+  position: absolute;
+  top: 12px; right: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  background: var(--qcl);
+  color: var(--qc);
+  padding: 2px 8px;
+  border-radius: 20px;
+  min-width: 22px;
+  text-align: center;
+}
+
 .cal-mobile { display: none; }
 
 .mcal-grid {
@@ -2195,6 +2263,52 @@ body {
       </div>
     </div>
 
+    <!-- Quick access grid — mobile only -->
+    <div class="quick-grid" id="quick-grid">
+      <button class="quick-btn" data-page="tasks" style="--qc:#7c6ef7;--qcl:#ede9fe">
+        <div class="quick-btn-icon" style="background:var(--qcl)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--qc)" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <span class="quick-btn-label">Tasks</span>
+        <span class="quick-btn-count" id="qb-tasks">0</span>
+      </button>
+      <button class="quick-btn" data-page="notes" style="--qc:#3b82f6;--qcl:#dbeafe">
+        <div class="quick-btn-icon" style="background:var(--qcl)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--qc)" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+        </div>
+        <span class="quick-btn-label">Notes</span>
+        <span class="quick-btn-sub">Write</span>
+      </button>
+      <button class="quick-btn" data-page="feed" style="--qc:#10b981;--qcl:#d1fae5">
+        <div class="quick-btn-icon" style="background:var(--qcl)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--qc)" stroke-width="2"><path d="M4 11a9 9 0 019 9"/><path d="M4 4a16 16 0 0116 16"/><circle cx="5" cy="19" r="1"/></svg>
+        </div>
+        <span class="quick-btn-label">Feed</span>
+        <span class="quick-btn-sub">News</span>
+      </button>
+      <button class="quick-btn" data-page="learn" style="--qc:#f59e0b;--qcl:#fef3c7">
+        <div class="quick-btn-icon" style="background:var(--qcl)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--qc)" stroke-width="2"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+        </div>
+        <span class="quick-btn-label">Learn</span>
+        <span class="quick-btn-sub">Ideas</span>
+      </button>
+      <button class="quick-btn" data-page="calendar" style="--qc:#ec4899;--qcl:#fce7f3">
+        <div class="quick-btn-icon" style="background:var(--qcl)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--qc)" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <span class="quick-btn-label">Calendar</span>
+        <span class="quick-btn-sub">Schedule</span>
+      </button>
+      <button class="quick-btn" data-page="status" style="--qc:#6366f1;--qcl:#e0e7ff">
+        <div class="quick-btn-icon" style="background:var(--qcl)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--qc)" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+        </div>
+        <span class="quick-btn-label">Status</span>
+        <span class="quick-btn-sub">Usage</span>
+      </button>
+    </div>
+
     <div class="content-grid">
       <!-- LEFT: Tasks by Section -->
       <div>
@@ -2511,6 +2625,8 @@ body {
     const t = today();
     const active = todos.filter(x => !isDone(x));
     document.getElementById('nav-task-count').textContent = active.length;
+    const qbTasks = document.getElementById('qb-tasks');
+    if (qbTasks) qbTasks.textContent = active.length || '';
 
     renderTodayTasks(t);
     renderUpcoming(t);
@@ -2891,6 +3007,12 @@ body {
     const tab = e.target.closest('.mob-tab');
     if (!tab) return;
     switchPage(tab.dataset.page);
+  });
+
+  document.getElementById('quick-grid').addEventListener('click', e => {
+    const btn = e.target.closest('.quick-btn');
+    if (!btn || !btn.dataset.page) return;
+    switchPage(btn.dataset.page);
   });
 
   // ===== FILTERS =====
